@@ -26,7 +26,7 @@ abstract class EntityId extends ValueObject
 
     public function toString(): string
     {
-        return "{$this->seqNo}-{$this->occuredDate->format('YmdHis')}-{$this->getAbbr()}";
+        return "{$this->getAbbr()}-{$this->occuredDate->format('Ymd')}-{$this->seqNo}";
     }
 
     public function getEqualityComponents(): array

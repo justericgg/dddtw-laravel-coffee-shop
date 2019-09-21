@@ -22,7 +22,7 @@ class EntityIdTest extends TestCase
 
         $r = $sut->toString();
 
-        $this->assertEquals('0-20190101131415-test', $r);
+        $this->assertEquals('test-20190101-0', $r);
     }
 }
 
