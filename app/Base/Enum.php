@@ -9,7 +9,7 @@ use ReflectionClass;
 use ReflectionException;
 use UnexpectedValueException;
 
-class Enum
+abstract class Enum
 {
     protected static $cache = [];
     protected $value;
