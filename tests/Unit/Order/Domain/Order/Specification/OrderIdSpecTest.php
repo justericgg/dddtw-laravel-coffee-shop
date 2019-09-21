@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Order\Domain\Specifications;
+namespace Order\Domain\Order\Specification;
 
-use App\Order\Domain\Model\Order\OrderId;
-use App\Order\Domain\Specifications\OrderIdSpec;
+use App\Order\Domain\Order\Model\OrderId;
+use App\Order\Domain\Order\Specification\OrderIdSpec;
 use DateTime;
 use Tests\TestCase;
 

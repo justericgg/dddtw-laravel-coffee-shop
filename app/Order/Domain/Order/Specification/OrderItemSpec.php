@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Order\Domain\Specifications;
+namespace App\Order\Domain\Order\Specification;
 
 use App\Base\Specification;
-use App\Order\Domain\Model\Order\OrderItem;
+use App\Order\Domain\Order\Model\OrderItem;
 
 class OrderItemSpec extends Specification
 {

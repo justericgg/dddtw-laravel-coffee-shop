@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Order\Domain\Specifications;
+namespace Order\Domain\Order\Specification;
 
-use App\Order\Domain\Model\Order\OrderStatus;
-use App\Order\Domain\Specifications\StatusTransitionSpec;
+use App\Order\Domain\Order\Model\OrderStatus;
+use App\Order\Domain\Order\Specification\StatusTransitionSpec;
 use Tests\TestCase;
 
 class StatusTransitionSpecTest extends TestCase

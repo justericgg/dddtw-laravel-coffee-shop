@@ -1,8 +1,8 @@
 <?php
 
-namespace Tests\Unit\Order\Domain\Model\Order;
+namespace Tests\Unit\Order\Domain\Order\Model;
 
-use App\Order\Domain\Model\Order\OrderId;
+use App\Order\Domain\Order\Model\OrderId;
 use DateTime;
 use Tests\TestCase;
 

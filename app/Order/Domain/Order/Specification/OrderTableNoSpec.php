@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Order\Domain\Specifications;
+namespace App\Order\Domain\Order\Specification;
 
 use App\Base\Specification;
 

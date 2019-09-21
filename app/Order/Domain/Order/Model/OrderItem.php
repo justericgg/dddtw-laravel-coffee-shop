@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Order\Domain\Model\Order;
+namespace App\Order\Domain\Order\Model;
 
 use App\Base\ValueObject;
 

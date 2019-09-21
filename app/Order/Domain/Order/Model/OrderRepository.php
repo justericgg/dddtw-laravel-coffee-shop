@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Order\Domain\Model\Order;
+namespace App\Order\Domain\Order\Model;
 
 
 interface OrderRepository

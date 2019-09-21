@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Order\Domain\Specifications;
+namespace Order\Domain\Order\Specification;
 
-use App\Order\Domain\Model\Order\OrderItem;
-use App\Order\Domain\Specifications\OrderItemSpec;
+use App\Order\Domain\Order\Model\OrderItem;
+use App\Order\Domain\Order\Specification\OrderItemSpec;
 use Tests\TestCase;
 
 class OrderItemSpecTest extends TestCase

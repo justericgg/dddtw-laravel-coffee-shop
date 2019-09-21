@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Order\Domain\Model\Order;
+namespace Order\Domain\Order\Model;
 
 class OrderTest
 {
