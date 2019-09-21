@@ -11,12 +11,43 @@ class Order extends Entity
 {
     private $orderId;
     private $tableNo;
+    private $items;
     private $createdDate;
     private $modifiedDate;
     private $orderStatus;
 
+    public function getOrderId(): OrderId
+    {
+        return $this->orderId;
+    }
+
+    public function getTableNo(): string
+    {
+        return $this->tableNo;
+    }
+
+    public function getItems(): array
+    {
+        return $this->items;
+    }
+
+    public function getCreatedDate(): DateTime
+    {
+        return $this->createdDate;
+    }
+
+    public function getModifiedDate(): ?DateTime
+    {
+        return $this->modifiedDate;
+    }
+
+    public function getOrderStatus(): OrderStatus
+    {
+        return $this->orderStatus;
+    }
+
     private function __construct(
-        string $orderId,
+        OrderId $orderId,
         string $tableNo,
         OrderStatus $orderStatus,
         array $items,
@@ -31,10 +62,8 @@ class Order extends Entity
         $this->modifiedDate = $modifiedDate;
     }
 
-
-
     public function getIdentity(): string
     {
-        $this->orderId;
+        return $this->orderId->toString();
     }
 }
