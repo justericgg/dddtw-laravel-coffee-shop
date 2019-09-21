@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Order\Domain\Order\Specification;
 
-use App\Order\Domain\Order\Model\OrderStatus;
-use App\Order\Domain\Order\Specification\StatusTransitionSpec;
+use Order\Domain\Order\Model\OrderStatus;
 use Tests\TestCase;
 
 class StatusTransitionSpecTest extends TestCase

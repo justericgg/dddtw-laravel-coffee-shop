@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\Order\Domain\Order\Model;
 
-use App\Order\Domain\Order\Model\OrderId;
 use DateTime;
+use Order\Domain\Order\Model\OrderId;
 use Tests\TestCase;
 
 class OrderIdTest extends TestCase

@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Order\Domain\Order\Specification;
 
-use App\Order\Domain\Order\Model\OrderId;
-use App\Order\Domain\Order\Specification\OrderIdSpec;
 use DateTime;
+use Order\Domain\Order\Model\OrderId;
 use Tests\TestCase;
 
 class OrderIdSpecTest extends TestCase

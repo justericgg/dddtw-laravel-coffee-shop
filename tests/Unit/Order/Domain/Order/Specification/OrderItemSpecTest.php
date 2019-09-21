@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Order\Domain\Order\Specification;
 
-use App\Order\Domain\Order\Model\OrderItem;
-use App\Order\Domain\Order\Specification\OrderItemSpec;
+use Order\Domain\Order\Model\OrderItem;
 use Tests\TestCase;
 
 class OrderItemSpecTest extends TestCase

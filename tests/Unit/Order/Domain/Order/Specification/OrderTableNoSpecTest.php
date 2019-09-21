@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Order\Domain\Order\Specification;
 
-use App\Order\Domain\Order\Specification\OrderTableNoSpec;
 use Tests\TestCase;
 
 class OrderTableNoSpecTest extends TestCase

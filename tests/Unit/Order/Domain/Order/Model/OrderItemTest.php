@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Order\Domain\Order\Model;
 
-use App\Order\Domain\Order\Model\OrderItem;
+use Order\Domain\Order\Model\OrderItem;
 use Tests\TestCase;
 
 class OrderItemTest extends TestCase
