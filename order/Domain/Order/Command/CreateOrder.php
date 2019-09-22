@@ -32,7 +32,7 @@ class CreateOrder
         return $this->items;
     }
 
-    public function createOrder(OrderId $orderId, string $tableNo, OrderStatus $status, array $items): void
+    public function __construct(OrderId $orderId, string $tableNo, OrderStatus $status, array $items): void
     {
         $this->orderId = $orderId;
         $this->tableNo = $tableNo;
