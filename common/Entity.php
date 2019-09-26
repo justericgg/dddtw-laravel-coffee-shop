@@ -8,6 +8,8 @@ abstract class Entity
 {
     abstract public function getIdentity(): string;
 
+    private $domainEvents;
+
     public function equals(?Entity $entity): bool
     {
         if ($entity === null) {
