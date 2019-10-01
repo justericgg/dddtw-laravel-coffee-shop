@@ -57,6 +57,11 @@ class Order extends Entity
         return $this->orderStatus;
     }
 
+    public function getIdentity(): string
+    {
+        return $this->orderId->toString();
+    }
+
     private function __construct(
         OrderId $orderId,
         string $tableNo,
@@ -106,11 +111,6 @@ class Order extends Entity
         $this->modifiedDate = new DateTime();
 
         $this->applyEvent(new OrderItemsChanged($this->orderId, $this->items, $this->modifiedDate));
-    }
-
-    public function getIdentity(): string
-    {
-        return $this->orderId->toString();
     }
 
     /**
