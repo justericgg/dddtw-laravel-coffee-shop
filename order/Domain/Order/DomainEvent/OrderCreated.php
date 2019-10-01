@@ -2,7 +2,10 @@
 
 declare(strict_types=1);
 
+namespace Order\Domain\Order\DomainEvent;
+
 use Common\DomainEvent;
+use DateTime;
 use Order\Domain\Order\Model\OrderId;
 
 class OrderCreated extends DomainEvent

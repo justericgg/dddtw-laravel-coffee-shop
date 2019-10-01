@@ -6,6 +6,12 @@ namespace Order\Domain\Order\Model;
 
 use Common\Entity;
 use DateTime;
+use Order\Domain\Order\Command\CreateOrder;
+use Order\Domain\Order\DomainEvent\OrderCreated;
+use Order\Domain\Order\Exception\OrderIdIsNullException;
+use Order\Domain\Order\Exception\OrderItemEmptyException;
+use Order\Domain\Order\Exception\TableNoEmptyException;
+use Order\Domain\Order\Policy\OrderPolicy;
 
 class Order extends Entity
 {
@@ -52,7 +58,7 @@ class Order extends Entity
         OrderStatus $orderStatus,
         array $items,
         DateTime $createdDate,
-        ?DateTime $modifiedDate
+        ?DateTime $modifiedDate = null
     ) {
         $this->orderId = $orderId;
         $this->tableNo = $tableNo;
@@ -60,6 +66,27 @@ class Order extends Entity
         $this->orderStatus = $orderStatus;
         $this->createdDate = $createdDate;
         $this->modifiedDate = $modifiedDate;
+
+        parent::__construct();
+    }
+
+    /**
+     * @param CreateOrder $cmd
+     * @return Order
+     * @throws OrderIdIsNullException
+     * @throws OrderItemEmptyException
+     * @throws TableNoEmptyException
+     */
+    public static function create(CreateOrder $cmd): Order
+    {
+        $order = new Order($cmd->getOrderId(), $cmd->getTableNo(), $cmd->getStatus(), $cmd->getItems(), new DateTime());
+
+        $orderPolicy = new OrderPolicy();
+        $orderPolicy->verify($order);
+
+        $order->applyEvent(new OrderCreated($order->getOrderId(), $order->getTableNo(), $order->getItems(), $order->getCreatedDate()));
+
+        return $order;
     }
 
     public function getIdentity(): string
