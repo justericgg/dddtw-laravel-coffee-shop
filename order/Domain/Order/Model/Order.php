@@ -113,6 +113,15 @@ class Order extends Entity
         $this->applyEvent(new OrderItemsChanged($this->orderId, $this->items, $this->modifiedDate));
     }
 
+    /**
+     * @throws StatusTransitionException
+     */
+    public function close(): void
+    {
+        $this->verifyStatus(OrderStatus::Deliver(), OrderStatus::Closed());
+        $this->changeStatus(OrderStatus::Closed());
+    }
+
     public function cancel(): void
     {
         $this->changeStatus(OrderStatus::Cancel());
