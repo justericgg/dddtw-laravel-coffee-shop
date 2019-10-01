@@ -6,8 +6,10 @@ namespace Order\Domain\Order\Model;
 
 use Common\Entity;
 use DateTime;
+use Order\Domain\Order\Command\ChangeItem;
 use Order\Domain\Order\Command\CreateOrder;
 use Order\Domain\Order\DomainEvent\OrderCreated;
+use Order\Domain\Order\DomainEvent\OrderItemsChanged;
 use Order\Domain\Order\Exception\OrderIdIsNullException;
 use Order\Domain\Order\Exception\OrderItemEmptyException;
 use Order\Domain\Order\Exception\TableNoEmptyException;
@@ -87,6 +89,20 @@ class Order extends Entity
         $order->applyEvent(new OrderCreated($order->getOrderId(), $order->getTableNo(), $order->getItems(), $order->getCreatedDate()));
 
         return $order;
+    }
+
+    public function changeItem(ChangeItem $cmd): void
+    {
+        $newItems = $cmd->getItems();
+
+        if ($newItems === null) {
+            return;
+        }
+
+        $this->items = $newItems;
+        $this->modifiedDate = new DateTime();
+
+        $this->applyEvent(new OrderItemsChanged($this->orderId, $this->items, $this->modifiedDate));
     }
 
     public function getIdentity(): string
