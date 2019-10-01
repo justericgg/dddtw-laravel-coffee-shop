@@ -116,6 +116,15 @@ class Order extends Entity
     /**
      * @throws StatusTransitionException
      */
+    public function process(): void
+    {
+        $this->verifyStatus(OrderStatus::Initial(), OrderStatus::Processing());
+        $this->changeStatus(OrderStatus::Processing());
+    }
+
+    /**
+     * @throws StatusTransitionException
+     */
     public function deliver(): void
     {
         $this->verifyStatus(OrderStatus::Processing(), OrderStatus::Deliver());
