@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Order\Domain\Order\Command;
+
 use Order\Domain\Order\Model\OrderId;
 use Order\Domain\Order\Model\OrderStatus;
 
