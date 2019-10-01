@@ -10,10 +10,13 @@ use Order\Domain\Order\Command\ChangeItem;
 use Order\Domain\Order\Command\CreateOrder;
 use Order\Domain\Order\DomainEvent\OrderCreated;
 use Order\Domain\Order\DomainEvent\OrderItemsChanged;
+use Order\Domain\Order\DomainEvent\OrderStatusChanged;
 use Order\Domain\Order\Exception\OrderIdIsNullException;
 use Order\Domain\Order\Exception\OrderItemEmptyException;
+use Order\Domain\Order\Exception\StatusTransitionException;
 use Order\Domain\Order\Exception\TableNoEmptyException;
 use Order\Domain\Order\Policy\OrderPolicy;
+use Order\Domain\Order\Specification\StatusTransitionSpec;
 
 class Order extends Entity
 {
@@ -108,5 +111,31 @@ class Order extends Entity
     public function getIdentity(): string
     {
         return $this->orderId->toString();
+    }
+
+    /**
+     * @param OrderStatus $prevStatus
+     * @param OrderStatus $targetStatus
+     * @throws StatusTransitionException
+     */
+    private function verifyStatus(OrderStatus $prevStatus, OrderStatus $targetStatus): void
+    {
+        if ($this->orderStatus->getValue() === $targetStatus->getValue()) {
+            return;
+        }
+
+        $spec = new StatusTransitionSpec($this->orderStatus, $prevStatus, $targetStatus);
+        if ($spec->isSatisfy() === false) {
+            throw new StatusTransitionException($this->orderStatus, $targetStatus);
+        }
+    }
+
+    private function changeStatus(OrderStatus $orderStatus): void
+    {
+        $oriStatus = $this->orderStatus;
+        $this->orderStatus = $orderStatus;
+        $this->modifiedDate = new DateTime();
+
+        $this->applyEvent(new OrderStatusChanged($this->orderId, $oriStatus, $this->orderStatus, $this->modifiedDate));
     }
 }

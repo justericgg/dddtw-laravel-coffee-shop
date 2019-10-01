@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Order\Domain\Order\Exception;
 
-use App\Order\Domain\Order\Model\OrderStatus;
 use Common\DomainException;
+use Order\Domain\Order\Model\OrderStatus;
 use Throwable;
 
 class StatusTransitionException extends DomainException
