@@ -113,6 +113,11 @@ class Order extends Entity
         $this->applyEvent(new OrderItemsChanged($this->orderId, $this->items, $this->modifiedDate));
     }
 
+    public function cancel(): void
+    {
+        $this->changeStatus(OrderStatus::Cancel());
+    }
+
     /**
      * @param OrderStatus $prevStatus
      * @param OrderStatus $targetStatus
