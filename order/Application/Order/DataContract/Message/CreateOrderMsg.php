@@ -11,7 +11,12 @@ class CreateOrderMsg
     public $tableNo;
     public $items;
 
-    public function __construct(string $tableNo, OrderItemRst $items)
+    /**
+     * CreateOrderMsg constructor.
+     * @param string $tableNo
+     * @param OrderItemRst[] $items
+     */
+    public function __construct(string $tableNo, array $items)
     {
         $this->tableNo = $tableNo;
         $this->items = $items;
