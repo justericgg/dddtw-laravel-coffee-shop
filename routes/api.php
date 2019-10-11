@@ -13,6 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('/order', 'Api\OrderController@createOrder');
+Route::get('/order/{id}', 'Api\OrderController@getOrder');
+Route::put('/order/{id}/orderItems', 'Api\OrderController@changeOrderItems');
+Route::put('/order/{id}/status', 'Api\OrderController@changeOrderStatus');
+Route::delete('/order/{id}', 'Api\OrderController@cancelOrder');
+
