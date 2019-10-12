@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use Exception;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Response;
 use InvalidArgumentException;
 use Order\Application\Order\CreateOrderSvc;
 use Order\Application\Order\DataContract\Message\ChangeItemMsg;
@@ -80,14 +82,15 @@ class OrderController extends Controller
         $itemTranslator = new OrderItemsTranslator();
         $changeItemSvc = new ChangeItemSvc($orderRepository, $idTranslator, $itemTranslator);
 
-        $orderRst = $changeItemSvc->handle($msg);
+        $changeItemSvc->handle($msg);
 
-        return json_encode($orderRst);
+        return response('', 204);
     }
 
     /**
      * @param Request $request
      * @param string $id
+     * @return ResponseFactory|Response
      * @throws Exception
      */
     public function changeOrderStatus(Request $request, string $id)
@@ -112,6 +115,8 @@ class OrderController extends Controller
         }
 
         $serv->handle($msg);
+
+        return response('', 204);
     }
 
     public function cancelOrder(string $id)

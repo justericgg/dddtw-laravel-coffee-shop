@@ -7,7 +7,6 @@ namespace Order\Application\Order\Service;
 use Exception;
 use InvalidArgumentException;
 use Order\Application\Order\DataContract\Message\ChangeItemMsg;
-use Order\Application\Order\DataContract\Result\OrderRst;
 use Order\Application\Order\DomainService\OrderIdTranslator;
 use Order\Application\Order\DomainService\OrderItemsTranslator;
 use Order\Domain\Order\Command\ChangeItem;
@@ -28,10 +27,9 @@ class ChangeItemSvc
 
     /**
      * @param ChangeItemMsg $changeItemMsg
-     * @return OrderRst
      * @throws Exception
      */
-    public function handle(ChangeItemMsg $changeItemMsg): OrderRst
+    public function handle(ChangeItemMsg $changeItemMsg): void
     {
         $orderId = $this->orderIdTranslator->translate($changeItemMsg->id);
 
@@ -46,13 +44,5 @@ class ChangeItemSvc
         $order->changeItem($cmd);
 
         $this->repository->save($order);
-
-        return new OrderRst(
-            $order->getOrderId()->toString(),
-            $order->getOrderStatus(),
-            $changeItemMsg->items,
-            $order->getCreatedDate(),
-            $order->getModifiedDate()
-        );
     }
 }
