@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Order\Application\Order\Service;
 
 use Exception;
+use InvalidArgumentException;
 use Order\Application\Order\DataContract\Message\ChangeItemMsg;
 use Order\Application\Order\DataContract\Result\OrderRst;
 use Order\Application\Order\DomainService\OrderIdTranslator;
@@ -35,7 +36,9 @@ class ChangeItemSvc
         $orderId = $this->orderIdTranslator->translate($changeItemMsg->id);
 
         $order = $this->repository->getBy($orderId);
-        //TODO: if order not exist
+        if ($order === null) {
+            throw new InvalidArgumentException("order not found: {$changeItemMsg->id}");
+        }
 
         $items = $this->itemsTranslator->translate($changeItemMsg->items);
 

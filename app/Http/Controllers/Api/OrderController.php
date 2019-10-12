@@ -2,20 +2,28 @@
 
 namespace App\Http\Controllers\Api;
 
+use Exception;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use InvalidArgumentException;
 use Order\Application\Order\CreateOrderSvc;
 use Order\Application\Order\DataContract\Message\ChangeItemMsg;
+use Order\Application\Order\DataContract\Message\CloseOrderMsg;
 use Order\Application\Order\DataContract\Message\CreateOrderMsg;
+use Order\Application\Order\DataContract\Message\DeliverOrderMsg;
 use Order\Application\Order\DataContract\Message\GetOrderMsg;
+use Order\Application\Order\DataContract\Message\ProcessOrderMsg;
 use Order\Application\Order\DataContract\Result\OrderItemRst;
 use Order\Application\Order\DomainService\OrderIdTranslator;
 use Order\Application\Order\DomainService\OrderItemsTranslator;
 use Order\Application\Order\Service\ChangeItemSvc;
+use Order\Application\Order\Service\DeliverOrderSvc;
 use Order\Application\Order\Service\GetOrderSvc;
+use Order\Application\Order\Service\ProcessOrderSvc;
 use Order\Domain\Order\Exception\OrderIdIsNullException;
 use Order\Domain\Order\Exception\OrderItemEmptyException;
 use Order\Domain\Order\Exception\TableNoEmptyException;
+use Order\Domain\Order\Model\OrderStatus;
 use Order\Infra\Repository\Mongo\OrderRepository;
 
 class OrderController extends Controller
@@ -77,9 +85,33 @@ class OrderController extends Controller
         return json_encode($orderRst);
     }
 
-    public function changeOrderStatus(string $id)
+    /**
+     * @param Request $request
+     * @param string $id
+     * @throws Exception
+     */
+    public function changeOrderStatus(Request $request, string $id)
     {
+        $repository = new OrderRepository();
+        $idTranslator = new OrderIdTranslator();
+        $inputs = $request->all();
+        switch ($inputs['orderStatus']) {
+            case OrderStatus::Processing()->getValue():
+                $msg = new ProcessOrderMsg($id);
+                $serv = new ProcessOrderSvc($repository, $idTranslator);
+                break;
+            case OrderStatus::Deliver()->getValue():
+                $msg = new DeliverOrderMsg($id);
+                $serv = new DeliverOrderSvc($repository, $idTranslator);
+                break;
+            case OrderStatus::Closed()->getValue():
+                $msg = new CloseOrderMsg($id);
+                break;
+            default:
+                throw new InvalidArgumentException('order status invalid');
+        }
 
+        $serv->handle($msg);
     }
 
     public function cancelOrder(string $id)
