@@ -9,7 +9,7 @@ use Order\Domain\Order\Model\OrderStatus;
 
 class OrderRst
 {
-    public $id;
+    public $orderId;
     public $status;
     public $items;
     public $createDate;
@@ -25,7 +25,7 @@ class OrderRst
      */
     public function __construct(string $id, OrderStatus $status, array $items, DateTime $createDate, ?DateTime $modifyDate = null)
     {
-        $this->id = $id;
+        $this->orderId = $id;
         $this->status = $status->getValue();
         $this->items = $items;
         $this->createDate = $createDate;

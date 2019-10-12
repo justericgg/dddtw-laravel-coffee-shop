@@ -36,7 +36,7 @@ class GetOrderSvc
         foreach ($order->getItems() as $item) {
             /** @var OrderItem $item */
             $items[] = [
-                'product_id' => $item->getProductId(),
+                'productId' => $item->getProductId(),
                 'qty' => $item->getQty(),
                 'price' => $item->getPrice(),
             ];

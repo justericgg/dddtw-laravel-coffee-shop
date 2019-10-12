@@ -17,7 +17,11 @@ class OrderItemsTranslator
     {
         $orderItems = [];
         foreach ($items as $item) {
-            $orderItems[] = new OrderItem($item->productId, $item->qty, $item->price);
+            if (is_array($item)) {
+                $orderItems[] = new OrderItem($item['productId'], $item['qty'], $item['price']);
+            } else {
+                $orderItems[] = new OrderItem($item->productId, $item->qty, $item->price);
+            }
         }
         return $orderItems;
     }

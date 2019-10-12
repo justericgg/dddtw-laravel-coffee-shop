@@ -41,15 +41,51 @@ class OrderRepository implements IOrderRepository
             $modifyDate = null;
         }
 
-        $items = [];
-        foreach ($data['items'] as $item) {
-            $items[] = new OrderItem($item['product_id'], $item['qty'], $item['price']);
-        }
+        $items = $this->buildItemsDomainCollection($data);
 
         return new Order($orderId, $data['table_no'], $orderStatus, $items, $createDate, $modifyDate);
     }
 
+    /**
+     * @param Order $order
+     * @throws Exception
+     */
     public function save(Order $order): void
+    {
+        /** @var Collection $collection */
+        $collection = Mongo::get()->coffee_shop->orders;
+
+        $fetchedData = $collection->findOne(['order_id' => $order->getOrderId()->toString()]);
+
+        if ($fetchedData === null) {
+            $collection->insertOne([
+                'order_id' => $order->getOrderId()->toString(),
+                'table_no' => $order->getTableNo(),
+                'order_status' => $order->getOrderStatus()->getValue(),
+                'items' => $this->buildItemsArray($order),
+                'create_date' => $order->getCreatedDate(),
+                'modify_date' => $order->getModifiedDate()
+            ]);
+        } else {
+            $collection->updateOne(
+                ['order_id' => $order->getOrderId()->toString()],
+                [
+                    '$set' => [
+                        'order_status' => $order->getOrderStatus()->getValue(),
+                        'items' => $this->buildItemsArray($order),
+                        'create_date' => $order->getCreatedDate(),
+                        'modify_date' => $order->getModifiedDate()
+                    ]
+                ]
+            );
+        }
+    }
+
+    /**
+     * @param Order $order
+     * @return array
+     */
+    private function buildItemsArray(Order $order): array
     {
         $items = [];
         foreach ($order->getItems() as $item) {
@@ -63,15 +99,16 @@ class OrderRepository implements IOrderRepository
             ];
         }
 
-        /** @var Collection $collection */
-        $collection = Mongo::get()->coffee_shop->orders;
-        $collection->insertOne([
-            'order_id' => $order->getOrderId()->toString(),
-            'table_no' => $order->getTableNo(),
-            'order_status' => $order->getOrderStatus()->getValue(),
-            'items' => $items,
-            'create_date' => $order->getCreatedDate(),
-            'modify_date' => $order->getModifiedDate()
-        ]);
+        return $items;
+    }
+
+    private function buildItemsDomainCollection($data): array
+    {
+        $items = [];
+        foreach ($data['items'] as $item) {
+            $items[] = new OrderItem($item['product_id'], $item['qty'], $item['price']);
+        }
+
+        return $items;
     }
 }

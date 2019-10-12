@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 
 Route::post('/order', 'Api\OrderController@createOrder');
 Route::get('/order/{id}', 'Api\OrderController@getOrder');
-Route::put('/order/{id}/orderItems', 'Api\OrderController@changeOrderItems');
+Route::put('/order/{id}/order_items', 'Api\OrderController@changeOrderItems');
 Route::put('/order/{id}/status', 'Api\OrderController@changeOrderStatus');
 Route::delete('/order/{id}', 'Api\OrderController@cancelOrder');
 

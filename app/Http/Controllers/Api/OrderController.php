@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Order\Application\Order\CreateOrderSvc;
+use Order\Application\Order\DataContract\Message\ChangeItemMsg;
 use Order\Application\Order\DataContract\Message\CreateOrderMsg;
 use Order\Application\Order\DataContract\Message\GetOrderMsg;
 use Order\Application\Order\DataContract\Result\OrderItemRst;
 use Order\Application\Order\DomainService\OrderIdTranslator;
 use Order\Application\Order\DomainService\OrderItemsTranslator;
+use Order\Application\Order\Service\ChangeItemSvc;
 use Order\Application\Order\Service\GetOrderSvc;
 use Order\Domain\Order\Exception\OrderIdIsNullException;
 use Order\Domain\Order\Exception\OrderItemEmptyException;
@@ -60,9 +62,19 @@ class OrderController extends Controller
         return json_encode($orderRst);
     }
 
-    public function changeOrderItems(string $id)
+    public function changeOrderItems(Request $request, string $id)
     {
+        $items = $request->all();
+        $msg = new ChangeItemMsg($id, $items);
 
+        $orderRepository = new OrderRepository();
+        $idTranslator = new OrderIdTranslator();
+        $itemTranslator = new OrderItemsTranslator();
+        $changeItemSvc = new ChangeItemSvc($orderRepository, $idTranslator, $itemTranslator);
+
+        $orderRst = $changeItemSvc->handle($msg);
+
+        return json_encode($orderRst);
     }
 
     public function changeOrderStatus(string $id)
