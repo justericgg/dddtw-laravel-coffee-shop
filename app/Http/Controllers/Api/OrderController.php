@@ -6,8 +6,11 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Order\Application\Order\CreateOrderSvc;
 use Order\Application\Order\DataContract\Message\CreateOrderMsg;
+use Order\Application\Order\DataContract\Message\GetOrderMsg;
 use Order\Application\Order\DataContract\Result\OrderItemRst;
+use Order\Application\Order\DomainService\OrderIdTranslator;
 use Order\Application\Order\DomainService\OrderItemsTranslator;
+use Order\Application\Order\Service\GetOrderSvc;
 use Order\Domain\Order\Exception\OrderIdIsNullException;
 use Order\Domain\Order\Exception\OrderItemEmptyException;
 use Order\Domain\Order\Exception\TableNoEmptyException;
@@ -46,7 +49,15 @@ class OrderController extends Controller
 
     public function getOrder(string $id)
     {
-        return $id;
+        $orderRepository = new OrderRepository();
+        $orderIdTranslator = new OrderIdTranslator();
+        $getOrderSvc = new GetOrderSvc($orderRepository, $orderIdTranslator);
+
+        $getOrderMsg = new GetOrderMsg($id);
+
+        $orderRst = $getOrderSvc->handle($getOrderMsg);
+
+        return json_encode($orderRst);
     }
 
     public function changeOrderItems(string $id)

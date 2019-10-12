@@ -62,7 +62,7 @@ class Order extends Entity
         return $this->orderId->toString();
     }
 
-    private function __construct(
+    public function __construct(
         OrderId $orderId,
         string $tableNo,
         OrderStatus $orderStatus,
