@@ -4,7 +4,7 @@
 
 ## Introduction
 
-This is a Laravel Domain-Driven Design demo project. I'm taking a C# coffee shop project as a reference from <a href="https://github.com/ArthurChang01/DDDTW.CoffeeShop"></a>.
+This is a Laravel Domain-Driven Design demo project. I'm taking a C# coffee shop project as a reference from [DDDTW.CoffeeShop](https://github.com/ArthurChang01/DDDTW.CoffeeShop).
 Checking out the C# project if you want to see more details about the concept.
 
 ## Before you start
