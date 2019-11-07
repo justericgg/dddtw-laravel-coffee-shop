@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Order\Domain\Order\Model;
 
-use Common\EntityId;
+use Justericgg\DDD\Common\EntityId;
 
 class OrderId extends EntityId
 {

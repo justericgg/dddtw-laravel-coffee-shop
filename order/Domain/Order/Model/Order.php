@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Order\Domain\Order\Model;
 
-use Common\Entity;
 use DateTime;
+use Justericgg\DDD\Common\Entity;
 use Order\Domain\Order\Command\ChangeItem;
 use Order\Domain\Order\Command\CreateOrder;
 use Order\Domain\Order\DomainEvent\OrderCreated;

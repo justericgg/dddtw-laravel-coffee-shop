@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Base;
 
-use Common\ValueObject;
+use Justericgg\DDD\Common\ValueObject;
 use Tests\TestCase;
 
 class ValueObjectTest extends TestCase

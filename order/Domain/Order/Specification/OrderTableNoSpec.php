@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Order\Domain\Order\Specification;
 
-use Common\Specification;
+use Justericgg\DDD\Common\Specification;
 
 class OrderTableNoSpec extends Specification
 {

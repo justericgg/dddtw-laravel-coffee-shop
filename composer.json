@@ -12,7 +12,8 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.0",
         "laravel/tinker": "^1.0",
-        "mongodb/mongodb": "^1.5"
+        "mongodb/mongodb": "^1.5",
+        "justericgg/php-ddd-common": "*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.6",
@@ -35,8 +36,7 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
-            "Order\\": "order/",
-            "Common\\": "common/"
+            "Order\\": "order/"
         },
         "classmap": [
             "database/seeds",

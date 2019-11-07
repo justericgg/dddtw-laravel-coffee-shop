@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Order\Domain\Order\Model;
 
-use Common\ValueObject;
+use Justericgg\DDD\Common\ValueObject;
 
 class OrderItem extends ValueObject
 {

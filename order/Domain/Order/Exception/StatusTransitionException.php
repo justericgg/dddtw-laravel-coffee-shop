@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Order\Domain\Order\Exception;
 
-use Common\DomainException;
+use Justericgg\DDD\Common\DomainException;
 use Order\Domain\Order\Model\OrderStatus;
 use Throwable;
 
