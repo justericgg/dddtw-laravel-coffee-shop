@@ -6,6 +6,7 @@ namespace Order\Domain\Order\DomainEvent;
 
 use DDDTW\DDD\Common\DomainEvent;
 use DateTime;
+use Illuminate\Support\Str;
 use Order\Domain\Order\Model\OrderId;
 
 class OrderItemsChanged extends DomainEvent
@@ -32,5 +33,10 @@ class OrderItemsChanged extends DomainEvent
         }
 
         return $components;
+    }
+
+    public function generateEventId(): string
+    {
+        return Str::uuid()->toString();
     }
 }
