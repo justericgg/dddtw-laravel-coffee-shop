@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Order\Domain\Order\DomainEvent;
 
-use Justericgg\DDD\Common\DomainEvent;
+use DDDTW\DDD\Common\DomainEvent;
 use DateTime;
 use Order\Domain\Order\Model\OrderId;
 use Order\Domain\Order\Model\OrderStatus;

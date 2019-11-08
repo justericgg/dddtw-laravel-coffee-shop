@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Base;
 
-use Justericgg\DDD\Common\Enum;
+use DDDTW\DDD\Common\Enum;
 use BadMethodCallException;
 use ReflectionException;
 use Tests\TestCase;

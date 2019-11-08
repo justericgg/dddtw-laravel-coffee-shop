@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Order\Domain\Order\Model;
 
-use Justericgg\DDD\Common\Enum;
+use DDDTW\DDD\Common\Enum;
 
 /**
  * @method static OrderStatus Initial()

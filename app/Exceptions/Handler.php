@@ -2,7 +2,7 @@
 
 namespace App\Exceptions;
 
-use Justericgg\DDD\Common\DomainException;
+use DDDTW\DDD\Common\DomainException;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Request;

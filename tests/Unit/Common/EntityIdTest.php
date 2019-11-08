@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Base;
 
-use Justericgg\DDD\Common\EntityId;
+use DDDTW\DDD\Common\EntityId;
 use DateTime;
 use InvalidArgumentException;
 use Tests\TestCase;

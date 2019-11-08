@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Order\Domain\Order\Specification;
 
-use Justericgg\DDD\Common\Specification;
+use DDDTW\DDD\Common\Specification;
 use Order\Domain\Order\Model\OrderId;
 
 class OrderIdSpec extends Specification

@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Base;
 
-use Justericgg\DDD\Common\Entity;
+use DDDTW\DDD\Common\Entity;
 use Tests\TestCase;
 
 class EntityTest extends TestCase
