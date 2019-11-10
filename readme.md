@@ -7,14 +7,9 @@
 This is a Laravel Domain-Driven Design demo project. I'm taking a C# coffee shop project as a reference from [DDDTW.CoffeeShop](https://github.com/ArthurChang01/DDDTW.CoffeeShop).
 Checking out the C# project if you want to see more details about the concept.
 
-## Before you start
+## Running unit tests
 
-I'm using Mongo DB in this project. Preparing a Mongo DB first if you want to run this project. The setting is configured in the .env file.
-
-## How to run service
-
-Just typing one line in your console
-
+```bash
+php <Project>/vendor/phpunit/phpunit/phpunit --configuration <Project>/phpunit.xml <Project>/tests/Unit
 ```
-./artisan serve
-```
+
